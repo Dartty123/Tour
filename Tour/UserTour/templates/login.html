@@ -1,0 +1,10 @@
+{% extends "base_user.html" %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Вхід у наш застусонок</button>
+</form>
+{% endblock content %}
