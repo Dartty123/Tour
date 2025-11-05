@@ -1,3 +1,4 @@
+from django.http import HttpRequest
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
@@ -35,3 +36,9 @@ def sign_in(request):
 @login_required(login_url="/sign_in/")
 def index(request):
     return render(request=request, template_name="index_user.html")
+
+
+@login_required
+def logout_user(request: HttpRequest):
+    logout(request)
+    return redirect("sign_in")

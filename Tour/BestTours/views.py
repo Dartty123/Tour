@@ -2,11 +2,13 @@ from django.shortcuts import render, redirect
 
 from .forms import ReservForm, TourForm
 from .models import Reserv, Tour
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request):
     return render(request=request, template_name='index.html')
 
+@login_required(login_url="/user/sign_in/")
 def add_tour(request):
     form = TourForm()
     if request.method == "POST":
