@@ -1,3 +1,4 @@
+from django.http import HttpRequest
 from django.shortcuts import render, redirect
 
 from .forms import ReservForm, TourForm
@@ -5,8 +6,9 @@ from .models import Reserv, Tour
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-def index(request):
-    return render(request=request, template_name='index.html')
+def index(request: HttpRequest):
+    tour = Tour.objects.filter(tour=request.title).all()
+    return render(request=request, template_name='index.html',tour=tour)
 
 @login_required(login_url="/user/sign_in/")
 def add_tour(request):
