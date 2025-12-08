@@ -7,8 +7,8 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request: HttpRequest):
-    tour = Tour.objects.filter(tour=request.title).all()
-    return render(request=request, template_name='index.html',tour=tour)
+    tour = Tour.objects.all()
+    return render(request=request, template_name='index.html',context=dict(tour=tour))
 
 @login_required(login_url="/user/sign_in/")
 def add_tour(request):
@@ -39,3 +39,4 @@ def add_reserv(request):
             reserv.save()
             return redirect('index')
     return render(request=request, template_name='add_reserv.html', context=dict(form=form))
+
